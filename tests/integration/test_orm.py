@@ -33,9 +33,9 @@ def insert_users(empty_session, values):
 
 def insert_article(empty_session):
     empty_session.execute(
-        'INSERT INTO movies (year, title, description, hyperlink) VALUES '
-        '(:release_year, "abcdef", '
-        '"aaaaa", '
+        'INSERT INTO movies (release_year, title, description, hyperlink) VALUES '
+        '(:release_year, "new movie", '
+        '"like it", '
         '"https://www.stuff.co.nz/national/health/119899280/ministry-of-health-gives-latest-update-on-novel-coronavirus")',
         {'release_year': 2020}
     )
@@ -59,17 +59,17 @@ def insert_article_tag_associations(empty_session, article_key, tag_keys):
 
 
 def insert_commented_article(empty_session):
-    article_key = insert_article(empty_session)
+    movie_key = insert_article(empty_session)
     user_key = insert_user(empty_session)
 
     timestamp_1 = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     timestamp_2 = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
     empty_session.execute(
-        'INSERT INTO comments (user_id, article_id, comment, timestamp) VALUES '
-        '(:user_id, :article_id, "Comment 1", :timestamp_1),'
-        '(:user_id, :article_id, "Comment 2", :timestamp_2)',
-        {'user_id': user_key, 'movie_id': article_key, 'timestamp_1': timestamp_1, 'timestamp_2': timestamp_2}
+        'INSERT INTO reviews (user_id, movie_id, review, timestamp) VALUES '
+        '(:user_id, :movie_id, "Comment 1", :timestamp_1),'
+        '(:user_id, :movie_id, "Comment 2", :timestamp_2)',
+        {'user_id': user_key, 'movie_id': movie_key, 'timestamp_1': timestamp_1, 'timestamp_2': timestamp_2}
     )
 
     row = empty_session.execute('SELECT id from movies').fetchone()
@@ -78,11 +78,11 @@ def insert_commented_article(empty_session):
 
 def make_article(): ######  !!!!!
     movie = Movie(
-        "aaaaaaa",
-        2020,
-        1001
+        6,
+        "new movie",
+        2020
         )
-    movie.description = "good"
+    movie.description = "like it"
     return movie
 
 
@@ -122,9 +122,11 @@ def test_loading_of_article(empty_session):
     article_key = insert_article(empty_session)
     expected_article = make_article()
     fetched_article = empty_session.query(Movie).one()
-
-    assert expected_article == fetched_article
     assert article_key == fetched_article.id
+    assert expected_article.title  == fetched_article.title
+    assert expected_article.release_year == fetched_article.release_year
+
+
 
 
 def test_loading_of_tagged_article(empty_session):
@@ -149,7 +151,7 @@ def test_loading_of_commented_article(empty_session):
     assert len(movie._reviews) == 2
 
     for review in movie._reviews:
-        assert review._Review_movie is movie
+        assert review._Review__movie is movie
 
 
 def test_saving_of_comment(empty_session):

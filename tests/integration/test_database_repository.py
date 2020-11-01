@@ -46,7 +46,8 @@ def test_repository_can_add_article(session_factory):
 
     new_movie_id = number_of_movies + 1
 
-    movie = Movie(6, 2020, "aaa")
+    movie = Movie(6, "aaaa", 2020)
+    movie.description = "good it"
     #movie._id = new_movie_id
     repo.add_movie(movie)
 
