@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+{% block content %}
+<main id="main">
+    <body>
+    <div>
+        {% for key in genre_urls %} <!--遍历！-->
+        <a class="btn-nav" href="{{ genre_urls[key] }}">{{ key }}</a>  <!-- key就是每一个电影类型-->
+        {% endfor %}
+    </div>
+    </body>
+
+</main>
+{% endblock %}

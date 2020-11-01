@@ -1,0 +1,4 @@
+id,username,movie_id,review_text,rating,timestamp
+1,thorke,1,"Great movie.",9,2020-02-28 14:31:26
+2,fmercury,1,"Like it",8,2020-02-28 14:39:51
+3,mjackson,1,"Good",7,2020-02-29 08:12:08

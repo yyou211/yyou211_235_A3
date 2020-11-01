@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<main id="main">
+    <body>
+
+    {% if movies is not none %}
+    {% for movie in movies %}
+    <a href="{{ movie.hyperlink }}" >
+            <div id="movie-description">
+                <p>{{ movie.title }}, ({{ movie.release_year }}).</p>
+            </div>
+
+    </a>
+    <p>{{movie.description}}</p> <!--这里改成电影简介-->
+    <p>Director: {{movie.director.director_full_name}}</p>
+    <p>All Actors:</p>
+    {% for actor in movie.actors %}
+    <p>{{actor.actor_full_name}}</p>
+    {% endfor %}
+
+            {% if movie.id == show_reviews_for_movie %}
+        <div style="clear:both">
+            {% for review in movie.reviews %}
+                <p>{{review.review_text}}, by {{review.user.user_name}}, {{review.timestamp}}</p>
+            {% endfor %}
+
+        </div>
+        {% endif %}
+
+
+    {% endfor %}
+
+    {% else %}
+
+    <p>Oh! There is no matching movie.</p>
+    <p>try other movies.</p>
+
+    {% endif %}
+
+
+    </body>
+</main>
+
+{% endblock %}

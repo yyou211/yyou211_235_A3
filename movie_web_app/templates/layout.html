@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> <!-- #规定文档的字符编码 -->
+    <title>iMovie</title>
+
+    <!--#链接到外部样式文件
+    # rel #规定当前文档与被链接文档/资源之间的关系。 stylesheet 要导入的样式表的 URL。
+    # href 属性规定外部资源（通常是样式表文件）的位置（URL）。
+    # href 变量？？
+     -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    /><!--url_for 知道一个函数，去获得它的URL 他接收函数名作为第一个参数，接收对应URL规则的命名参数 -->
+
+    <!-- type 被链接文档的类型   'bookmark' 相关文档-->
+	<link
+      rel="bookmark"
+	  type="image/x-icon"
+      href="favicon.ico"
+    />
+	
+	<link
+      rel="icon"
+      href="favicon.ico"
+    />
+  </head>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  <body> <!-- 把内容包含其中可以用css控制样式   四个部分-->
+    <div id="body">
+      <!-- Include navigation partial. -->
+      {% include 'navigation.html' %}
+
+      <div id="content-2">
+        <!-- Include header partial. -->
+        {% include 'header.html' %}
+
+        <div id="container">
+          <!-- Main content block to be supplied by page. -->
+          {% block content %} {% endblock %} <!-- 有一个名为content的块，应该由继承自此模板的子块重写。-->
+
+          <!-- Include sidebar partial. -->
+          {% include 'sidebar.html' %}
+        </div>
+        
+      </div>
+    </div>
+  </body>
+</html>

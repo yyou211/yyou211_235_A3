@@ -1,0 +1,79 @@
+<!--好多都是通过CSS定义的-->
+
+<nav id="nav"> <!--导航栏-->
+  <img id="logo" src="{{ url_for('static', filename='covid-19.png') }}" />
+
+  <h2 id="nav-header"> <!-- 这个if statement怎么来的！！-->
+    {% if 'username' in session %} Hello, {{ session['username'] }} {%
+    endif %}
+  </h2>
+<!--这些bp在blueprint里-->
+  <a class="btn-nav" href="{{ url_for('home_bp.home') }}">Home</a>
+  <a class="btn-nav" href="{{ url_for('authentication_bp.register') }}">Register</a>
+  <a class="btn-nav" href="{{ url_for('authentication_bp.login') }}">Login</a>
+  <a class="btn-nav" href="{{ url_for('authentication_bp.logout') }}">Logout</a>
+
+<!--  <div>-->
+<!--    <h3>-->
+<!--      <a class="btn-nav" href="{{ url_for('movie_bp.movies_by_year') }}">-->
+<!--        Browse timeline-->
+<!--      </a>-->
+<!--    </h3>-->
+<!--  </div>-->
+
+  <div> <!--目录， 可以通过电影类型检索-->
+    <h3>
+      <a class="btn-nav" href="{{ url_for('movie_bp.genres_list') }}">
+        Browse by genre
+      </a>
+    </h3>
+<!--    {% for key in genre_urls %} &lt;!&ndash;遍历！&ndash;&gt;-->
+<!--      <a class="btn-nav" href="{{ genre_urls[key] }}">{{ key }}</a>  &lt;!&ndash; key就是每一个电影类型&ndash;&gt;-->
+<!--    {% endfor %}-->
+  </div>
+
+<!--  <div>-->
+<!--    <h3>-->
+<!--      <a class="btn-nav" href="{{ url_for('movie_bp.actors_list') }}">-->
+<!--        All actors-->
+<!--      </a>-->
+<!--    </h3>-->
+<!--  </div>-->
+
+<!--  <div>-->
+<!--    <h3>-->
+<!--      <a class="btn-nav" href="{{ url_for('movie_bp.directors_list') }}">-->
+<!--        All directors-->
+<!--      </a>-->
+<!--    </h3>-->
+<!--  </div>-->
+
+<!--  <div>-->
+<!--    <h3>-->
+<!--      <a class="btn-nav" href="{{ url_for('movie_bp.search_movie') }}">-->
+<!--        Search movie-->
+<!--      </a>-->
+<!--    </h3>-->
+<!--  </div>-->
+
+<!--  <div>-->
+<!--    <h3>-->
+<!--      <a class="btn-nav" href="{{ url_for('movie_bp.search_movie_by_director') }}">-->
+<!--        Search movie by director-->
+<!--      </a>-->
+<!--    </h3>-->
+<!--  </div>-->
+<!--  <div>-->
+<!--    <h3>-->
+<!--      <a class="btn-nav" href="{{ url_for('movie_bp.search_movie_by_actor') }}">-->
+<!--        Search movie by actor-->
+<!--      </a>-->
+<!--    </h3>-->
+<!--  </div>-->
+
+
+
+  <div id="nav-footer">
+    COMPSCI 235 Software Development Methodologies
+  </div>
+</nav>
